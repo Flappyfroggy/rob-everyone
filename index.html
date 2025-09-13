@@ -33,11 +33,42 @@ h1 {
 </head>
 <body>
 <h1>Rob Everyone Simulator</h1>
-<p>Instructions: As people appear, rob them quickly before they disappear by left clicking them. Each time you rob someone, you'll gain in between 1-5 coins. If you rob someone that appears golden, you'll gain in between 5-15 coins. Be careful to not click people who appear red, because they will kill you, reducing your time left by 10 seconds and stealing 3 coins. Be extremely careful to not rob any frogs, because they will end your game immediately and steal all your coins.</p>
-<button onclick="start()" type="button" value="Start Game" id="startbutton">
+<p>Instructions: As people appear, rob them quickly before they disappear by left clicking them. Each time you rob someone, you'll gain between 1-5 coins. If you rob someone that appears golden, you'll gain in between 5-15 coins. Be careful to not click people who appear red, they will steal 3 coins. </p>
+<button onclick="start()" type="button" id="startbutton">start game</button>
 <script>
+var coins = 0
 function start() {
-  
+document.getElementById("startbutton").remove();
+const intervalID = setInterval(createimg, 2000);
+ setTimeout(() => {
+        clearInterval(intervalID);
+        document.getElementById("score").innerHTML += "<br>Time's up!";
+      }, 60000);
+    }
+
+function createimg() {
+const img = document.createElement("img");
+img.src = "thing.png";
+document.body.appendChild(img);
+img.style.position = 'absolute';
+const randomTop = Math.floor(Math.random() * (window.innerHeight - img.height));
+const randomLeft = Math.floor(Math.random() * (window.innerWidth - img.width)); 
+img.style.top = `${randomTop}px`;
+img.style.left = `${randomLeft}px`;
+ img.onclick = function () {
+        const gain = Math.floor(Math.random() * 5) + 1;
+        coins += gain;
+        document.getElementById("score").innerText = "You have " + coins + " coins!";
+        img.remove();
+      };
+
+      document.body.appendChild(img);
+
+      setTimeout(() => {
+        if (document.body.contains(img)) {
+          img.remove();
+        }
+      }, 1000);
 }
 </script>
 </body>
