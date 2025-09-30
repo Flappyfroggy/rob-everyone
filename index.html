@@ -48,9 +48,11 @@ function start() {
 document.getElementById("startbutton").remove();
 const intervalID = setInterval(createimg, 500);
 const intervalID2 = setInterval(createimggold, 1000);
+const intervalID3 = setInterval(createimgred, 1500);
  setTimeout(function() {
         clearInterval(intervalID);
         clearInterval(intervalID2);
+        clearInterval(intervalID3);
         document.getElementById("score").innerHTML += "<br>Time's up! HIGH SCORE!";
       }, 30000);
     }
@@ -98,6 +100,29 @@ gold.style.left = `${randomLeft}px`;
       setTimeout(() => {
         if (document.body.contains(gold)) {
           gold.remove();
+        }
+      }, 500);
+}
+function createimgred() {
+const r = document.createElement("img");
+r.src = "red.png";
+r.style.position = 'absolute';
+const randomTop = Math.floor(Math.random() * (window.innerHeight - r.height));
+const randomLeft = Math.floor(Math.random() * (window.innerWidth - r.width)); 
+r.style.top = `${randomTop}px`;
+r.style.left = `${randomLeft}px`;
+ r.onclick = function () {
+        const gain = Math.floor(Math.random() * 15) + 1;
+        coins -= gain;
+        document.getElementById("score").innerText = "You have " + coins + " coins!";
+        r.remove();
+      };
+
+      document.body.appendChild(r);
+
+      setTimeout(() => {
+        if (document.body.contains(r)) {
+          r.remove();
         }
       }, 500);
 }
