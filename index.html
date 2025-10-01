@@ -8,7 +8,10 @@
 <style>
 body {
     background-color: antiquewhite;
-}
+    background-color: #e5e5f7;
+    background-color: #e5e5f7;
+    background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #e5e5f7 10px ), repeating-linear-gradient( #e9b2d155, #e9b2d1 );
+ }
 p {
   font-family: "Indie Flower", cursive;
   font-style: normal;
@@ -86,6 +89,20 @@ body {
   font-family: "Indie Flower", cursive;
   font-size: x-large;
   margin-top: 10px;
+  animation-duration: 3s;
+  animation-name: slide-in;
+}
+
+@keyframes slide-in {
+  from {
+    translate: 150vw 0;
+    scale: 200% 1;
+  }
+
+  to {
+    translate: 0 0;
+    scale: 100% 1;
+  }
 }
 </style>
 </head>
