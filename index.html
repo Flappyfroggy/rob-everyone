@@ -42,8 +42,11 @@ h1 {
 <p>Instructions: As people appear, rob them quickly before they disappear by left clicking them.  you'll gain between 1-5 coins. If you rob someone that appears golden, you'll gain in between 1-15 coins. Be careful to not click characters who appear red. Rarely a frog will appear and can grant you up to 100 coins. You have 30 seconds.</p>
 <button onclick="start()" type="button" id="startbutton">start game</button>
 <div id="score">You have 0 coins!</div>
+<div id="highscore">"your highscore is 0 coins!</div>
 <script>
-var coins = 0
+var coins = 0;
+var highscore = localStorage.getItem("highscore") || 0;
+document.getElementById("highscore").innerText = "Your high score is " + highscore + " coins!";
 function start() {
 document.getElementById("startbutton").remove();
 const intervalID = setInterval(createimg, 500);
@@ -57,10 +60,15 @@ const intervalID5 = setInterval(createimgfrog, 5000);
         clearInterval(intervalID3);
         clearInterval(intervalID4);
         clearInterval(intervalID5);
-        document.getElementById("score").innerHTML += "<br>Time's up! HIGH SCORE!";
-      }, 30000);
+        if (coins > highscore) {
+          highscore = coins;
+          document.getElementById("highscore").innerText = "Your high score is " + highscore + " coins! NEW HIGH SCORE!";
+          localStorage.setItem("highscore", highscore);
+          JSON.parse(localStorage.getItem("highscore"));
+        }
+        document.getElementById("score").innerHTML += "<br>Time's up!";
+      }, 31000);     
     }
-
 function createimg() {
 const img = document.createElement("img");
 img.src = "thing.png";
@@ -82,7 +90,7 @@ img.style.left = `${randomLeft}px`;
         if (document.body.contains(img)) {
           img.remove();
         }
-      }, 1000);
+      }, 1250);
 }
 function createimggold() {
 const gold = document.createElement("img");
@@ -105,7 +113,7 @@ gold.style.left = `${randomLeft}px`;
         if (document.body.contains(gold)) {
           gold.remove();
         }
-      }, 650);
+      }, 800);
 }
 function createimgred() {
 const r = document.createElement("img");
@@ -128,7 +136,7 @@ r.style.left = `${randomLeft}px`;
         if (document.body.contains(r)) {
           r.remove();
         }
-      }, 3000);
+      }, 2500);
 }
 function createimgredfrog() {
 const rf = document.createElement("img");
@@ -150,7 +158,7 @@ rf.style.left = `${randomLeft}px`;
         if (document.body.contains(rf)) {
           rf.remove();
         }
-      },3000);
+      },2500);
 }
 function createimgfrog() {
 const f = document.createElement("img");
@@ -163,7 +171,7 @@ f.style.left = `${randomLeft}px`;
  f.onclick = function () {
         const gain = Math.floor(Math.random() * 100) + 1;
         coins += gain;
-        document.getElementById("score").innerText = "You have " + coins + " coins!!";
+        document.getElementById("score").innerText = "You have " + coins + " coins!";
         f.remove();
       };
 
@@ -173,7 +181,7 @@ f.style.left = `${randomLeft}px`;
         if (document.body.contains(f)) {
           f.remove();
         }
-      },700);
+      },800);
 }
 </script>
 </body>
