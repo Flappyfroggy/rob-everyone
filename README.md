@@ -1,2 +1,2 @@
 # rob everyone
-game in browser where you rob everyone for coins in the time span of 1 minute and try get a new highscore, BUT if you rob the frog you lose all your coins. 
+A fast-paced browser game where the player takes on the role of a thief whose only goal is to rob as many people as possible and collect coins for a high score. The gameplay is simple, you click on the character to steal their coins, and each successful robbery adds to your total. However, not everyone is a safe target because some will steal coins from you instead. Picking the wrong person to rob can drain your stash and ruin your run, but the ones who will steal from you are highlighted in red. The more coins you gather without losing them, the higher your score climbs.
